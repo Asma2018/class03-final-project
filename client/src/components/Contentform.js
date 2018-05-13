@@ -46,6 +46,7 @@ handleSubmit(event) {
         console.log(data)    
         if(data == "success"){
            this.setState({msg: "Thanks for sharing"});  
+           
         }
     }).catch(function(err) {
         console.log(err)
@@ -61,7 +62,7 @@ logChange(e) {
 }
   render() {
     return (
-      <div className="Test">
+      <div className="contentform">
       
       <form action="" onSubmit={this.handleSubmit} method="POST">
                   
@@ -108,8 +109,11 @@ logChange(e) {
                 
  
                 <input type="submit" value="Submit" />
+                <Link to='/list'>
+            <input type="submit" value='Cancel'/>
+            </Link>
                 
-                <input type="submit" value="Cancel" onClick={this.onClickClose} />
+              
  
                 <hr />
                 </form>
