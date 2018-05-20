@@ -19,6 +19,7 @@ class Listview extends Component {
     this.typeFilter=this.typeFilter.bind(this)
     this.upvote = this.upvote.bind(this)
     
+    
 }
 
 componentDidMount(){
@@ -80,11 +81,31 @@ upvote(id,upvotes){
     },
     body: JSON.stringify({
       id: id,
-      upvotes: upvotes
+      upvotes: upvotes,
+     
     })
   })
     .catch((err) => {
       alert('Error occured while trying to upvote');
+    });
+    this.fetchData();
+}
+downvote(id,downvotes){
+   
+  fetch('/upvote', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      id: id,
+      downvotes: downvotes,
+     
+    })
+  })
+    .catch((err) => {
+      alert('Error occured while trying to Downvote');
     });
     this.fetchData();
 }
@@ -105,14 +126,14 @@ upvote(id,upvotes){
        
       </ul>
 
-      <hr />
+    
 
-      <Route path="/contentform" component={Contentform} />
+      <Route exact path="/contentform" component={Contentform} />
      
 
    
     </div>
-  </Router>;
+  </Router>
 
  <hr />
  <form >
@@ -161,14 +182,22 @@ upvote(id,upvotes){
                        <Link to={`/detailsview/${index}`}>
                       <h3 className='link'><b>{a.title}</b></h3>
                       <p className='link'>{a.link}</p>
-                     
+                    
                       <button value="Upvote" key={a.id} onClick={
                         ()=>{
                           this.upvote(a.id,a.upvote)
                         }
                        } >Upvote ({a.upvote})</button>
                       
+                      <button value="downvote" key={a.id} onClick={
+                        ()=>{
+                          this.downvote(a.id,a.downvote)
+                        }
+                       } >Downvote ({a.downvote})</button>
+                      
+                     
                     </Link>
+       
                  
                   </td>   
                   </tr>

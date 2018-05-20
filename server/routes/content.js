@@ -14,6 +14,7 @@ router.post('/content', function(req, res, next) {
     type:req.body.type
   })
   .then(function (result){
+    res.json({ success: true, message: 'ok' });
     res.send(result);
   })
 });
